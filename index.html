@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nweather</title>
+    <style>
+
+        @font-face {
+            font-family: Nothing_Font; /* set name */
+            src: url(Ndot57-Regular.otf); /* url of the font */
+        }
+
+        @font-face {
+            font-family: inter; /* set name */
+            src: url(Inter-Light.otf); /* url of the font */
+        }
+
+        body{
+            margin:0;
+            padding:0;
+            background-color: #000000;
+            color:white;
+        }
+
+        #menusvg{
+            fill:white;
+            width:9dvw;
+            margin-left:2dvw;
+        }
+
+        #fixedbar{
+            width:100dvw;
+            height:28dvw;
+            display:flex;
+            flex-direction:column;
+            padding-top:2dvw;
+            position:fixed;
+            top:0;
+            background-color:black;
+            z-index:99;
+        }
+
+        #derest{
+            z-index:1;
+            border-radius:35px 35px 0px 0px;
+            margin-top:30dvw;
+            overflow-y: scroll;
+            height:calc(100dvh - 30dvw);
+            width:96dvw;
+            margin-left:2dvw;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            scroll-timeline-name: --main-scroll;
+            scroll-timeline-axis: block;
+        }
+
+        #derest::-webkit-scrollbar {
+            display: none;
+        }
+
+        #part1, #part2{
+            display:flex;
+            flex-direction:row;
+            position:relative;
+            height:10dvw;
+        }
+
+        #currenttemp{
+            font-size:11dvw;
+            font-family: Nothing_Font;
+            position:absolute;
+            left:2dvw;
+            top:0%;
+            transform: translate(0%,-50%);
+        }
+
+        #locationname{
+            font-family: Nothing_Font;
+            font-size:4dvw;
+            position:absolute;
+            height:9dvw;
+            left:50%;
+            top:27%;
+            transform: translate(-50%,-50%);
+        }
+
+        img:not([src]), 
+        img[src=""] {
+            opacity: 0;
+            transition:0.3s;
+        }
+
+        #currentweathericon{
+            width:40dvw;
+            height:40dvw;
+            margin-left:30dvw;
+            margin-top:30dvw;
+            border:none;
+            outline:none;
+            animation:scrollanimatie linear;
+            animation-timeline: --main-scroll;
+            animation-range: cover 0% exit 100%;
+        }
+
+        @keyframes scrollanimatie {
+            to{
+                transform: scale(0.2);
+                opacity:0;
+            }
+        }
+
+        #hourtemp{
+            width:92dvw;
+            padding-left:2dvw;
+            padding-right:2dvw;
+            height:35dvw;
+            border-radius:15px;
+            background-color: #404040;
+            margin-top:30dvw;
+            display:flex;
+            flex-direction:row;
+            gap:8dvw;
+            flex-shrink: none;
+            overflow-x: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            transition:0.3s;
+        }
+
+        #hourrain{
+            width:92dvw;
+            padding-left:2dvw;
+            padding-right:2dvw;
+            height:35dvw;
+            border-radius:15px;
+            background-color: #404040;
+            margin-top:2dvw;
+            display:block;
+            flex-direction:row;
+            gap:8dvw;
+            flex-shrink: none;
+            overflow-x: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            transition:0.3s;
+        }
+
+        #chartwrapper{
+            width:170dvw;
+            height:35dvw;
+            position: relative;
+            transition:0.3s;
+        }
+
+        #hourtemp::-webkit-scrollbar {
+            display: none;
+        }
+
+        .uurblok img {
+            width:12dvw;
+            transition:0.3s;
+        }
+
+        .uurblok{
+            width:15dvw;
+            flex-shrink: 0;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction:column;
+            font-family: inter;
+            font-size:4dvw;
+            transition:0.3s;
+        }
+
+        #uurblok0{
+            margin-left:2dvw;
+        }
+
+        .square{
+            width:47dvw;
+            height:47dvw;
+            border-radius:15px;
+            background-color:#404040;
+            font-family: Nothing_Font;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            transition:0.3s;
+        }
+
+        .circle{
+            width:47dvw;
+            height:47dvw;
+            border-radius:100px;
+            background-color:#404040;
+            font-family: Nothing_Font;
+            display:flex;
+            align-items: center;
+            justify-content: center;
+            transition:0.3s;
+        }
+
+        #daily{
+            display:flex;
+            flex-direction:row;
+            flex-wrap:wrap;
+            width:96dvw;
+            margin-top:2dvw;
+            margin-bottom:15dvw;
+            gap:2dvw;
+        }
+
+        h1, h2, h3, h4, h5, p, svg, img, div{
+            user-select: none;
+        }
+
+        #sunrisesvg{
+            width:28dvw;
+            position:absolute;
+            top:20%;
+        }
+
+        #sunrise{
+            display:flex;
+            flex-direction:column;
+            position:relative;
+        }
+
+        #sunrisetekst{
+            font-size:7dvw;
+            display:flex;
+            margin:0;
+            padding:0;
+            position:absolute;
+            top:60%;
+            transition:0.3s;
+        }
+
+        #windrichting{
+            width:18dvw;
+            margin-top:-5dvw;
+            transition:0.3s;
+        }
+
+        #winddirection{
+            position:relative;
+        }
+
+        #windspeed{
+            position:absolute;
+            bottom:-8%;
+            left:50%;
+            transform:translate(-50%,-50%);
+            transition:0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div id="fixedbar">
+        <div id="part1">
+            <svg id="menusvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M96 160C96 142.3 110.3 128 128 128L512 128C529.7 128 544 142.3 544 160C544 177.7 529.7 192 512 192L128 192C110.3 192 96 177.7 96 160zM96 320C96 302.3 110.3 288 128 288L512 288C529.7 288 544 302.3 544 320C544 337.7 529.7 352 512 352L128 352C110.3 352 96 337.7 96 320zM544 480C544 497.7 529.7 512 512 512L128 512C110.3 512 96 497.7 96 480C96 462.3 110.3 448 128 448L512 448C529.7 448 544 462.3 544 480z"/></svg>          
+            <h3 id="locationname">your location</h3>
+        </div>
+        <div id="part2">
+            <h1 id="currenttemp"></h1>
+            <div id="currenttemps">
+                <h5 id="currentmin"></h5>
+                <h5 id="currentmax"></h5>
+            </div>
+        </div>
+    </div>
+    <div id="derest">
+    <img id="currentweathericon" src="">
+    <div id="charts">
+        <div id="hourtemp"></div>
+        <div id="hourrain">
+            <div id="chartwrapper">
+                <canvas id="regengrafiek"></canvas>
+            </div>
+        </div>
+        <div id="daily">
+        <div id="sunrise" class="square">
+            <img id="sunrisesvg" src="sunrise.svg">
+            <h5 id="sunrisetekst"></h5>
+        </div>
+        <div id="winddirection" class="square">
+            <img src="arrow.svg" id="windrichting">
+            <h5 id="windspeed"></h5>
+        </div>
+        <div id="uv" class="circle">
+            <h5 id="uvtekst"></h5>
+        </div>
+        <div id="air" class="square">
+            <h5 id="airpressure"></h5>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+
+        var usercurrentlat;
+        var usercurrentlon;
+        var weericoon;
+        var sun;
+        var moon = 0;
+        var suntekst;
+        const uren = [];
+
+        function getlocation(){
+            navigator.geolocation.getCurrentPosition((position) => {
+                usercurrentlat = position.coords.latitude;
+                usercurrentlon = position.coords.longitude;
+                getweather();
+            })
+        }
+
+        function getweather(){
+            const requestOptions = {
+                method: "GET",
+                redirect: "follow"
+            };
+
+            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${usercurrentlat}&longitude=${usercurrentlon}&timezone=auto&forecast_days=14&current=temperature_2m,precipitation,precipitation_probability,wind_speed_10m,wind_direction_10m,surface_pressure,uv_index,weather_code&hourly=temperature_2m,precipitation_probability,precipitation,weather_code&forecast_hours=24&past_hours=0&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset`, requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                    document.getElementById("currenttemp").innerHTML = result.current.temperature_2m + "C";
+                    document.getElementById("windspeed").innerHTML = result.current.wind_speed_10m + "km/u";
+                    document.getElementById("uvtekst").innerHTML = result.current.uv_index;
+                    document.getElementById("airpressure").innerHTML = result.current.surface_pressure + "hPa";
+
+                    var h = new Date();
+                    if(h.getHours() > 12){
+                        sun = result.daily.sunset[0];
+                        var q = new Date(sun);
+                        suntekst = q.getHours() + ":" + q.getMinutes();
+                        if(h.getHours() > q){
+                            moon = 1;
+                        } else {
+                            moon = 0;
+                        }
+                    } else {
+                        sun = result.daily.sunrise[0];
+                        var q = new Date(sun);
+                        suntekst = q.getHours() + ":" + q.getMinutes();
+                        if(h.getHours() < q){
+                            moon = 1;
+                        } else {
+                            moon = 0;
+                        }
+                    };
+
+                    document.getElementById("sunrisetekst").innerHTML = suntekst;                
+
+                    if(result.current.weather_code >= 90){
+                        weericoon = "/bliksem.svg";
+                    } else if(result.current.weather_code >= 81 || result.current.weather_code >= 66 || result.current.weather_code >= 67){
+                        weericoon = "/hagel.svg";
+                    } else if(result.current.weather_code >= 70){
+                        weericoon = "/sneeuw.svg";
+                    } else if(moon === 1){
+                        weericoon = "/maan.svg";
+                    } else if(result.current.weather_code >= 50 || result.current.weather_code >= 80){
+                        weericoon = "/regen.svg";
+                    } else if(result.current.weather_code >= 40){
+                        weericoon = "/mist.svg";
+                    } else if(result.current.weather_code === 3){
+                        weericoon = "/wolk.svg";
+                    }  else if(result.current.weather_code > 0){
+                        weericoon = "/zon+wolk.svg";
+                    } else if(result.current.weather_code === 0){
+                        weericoon = "/zon.svg";
+                    }
+
+                    document.getElementById("currentweathericon").src = weericoon;
+                    for(let i = 0; i < 24; i++){
+                        var q = new Date(result.hourly.time[i]);
+                        var uurtekst = q.getHours();
+                        uren.push(uurtekst + "u");
+                        if(uurtekst === 0){uurtekst = 24;}
+                        var uurtemp = result.hourly.temperature_2m[i];
+
+                        if(result.hourly.weather_code[i] >= 90){
+                            var uurweericoon = "/bliksem.svg";
+                        } else if(result.hourly.weather_code[i] >= 81 || result.hourly.weather_code[i] >= 66 || result.hourly.weather_code[i] >= 67){
+                            var uurweericoon = "/hagel.svg";
+                        } else if(result.hourly.weather_code[i] >= 70){
+                            var uurweericoon = "/sneeuw.svg";
+                        } else if(moon === 1){
+                            var uurweericoon = "/maan.svg";
+                        } else if(result.hourly.weather_code[i] >= 50 || result.hourly.weather_code[i] >= 80){
+                            var uurweericoon = "/regen.svg";
+                        } else if(result.hourly.weather_code[i] >= 40){
+                            var uurweericoon = "/mist.svg";
+                        } else if(result.hourly.weather_code[i] === 3){
+                            var uurweericoon = "/wolk.svg";
+                        }  else if(result.hourly.weather_code[i] > 0){
+                            var uurweericoon = "/zon+wolk.svg";
+                        } else if(result.hourly.weather_code[i] === 0){
+                            var uurweericoon = "/zon.svg";
+                        }
+
+                        var el = document.createElement("div");
+                        el.classList.add("uurblok");
+                        el.setAttribute("id", "uurblok" + i);
+                        el.innerHTML = `<h3>${uurtekst}u</h3>
+                                        <img src="${uurweericoon}">
+                                        <h3>${uurtemp}°C</h3>`;
+                        document.getElementById("hourtemp").appendChild(el);
+
+                        console.log(uurtekst + ", " + uurweericoon + ", " + uurtemp + ", " + i);
+                    }
+
+                    const canvas = document.getElementById("regengrafiek");
+                    console.log(result.hourly.precipitation);
+                    const grafiek = new Chart(canvas, {
+                        type: 'line',
+                        data: {
+                            labels: uren,
+                            datasets: [{
+                                label: 'rain (mm)',
+                                data: result.hourly.precipitation,
+
+                                borderColor: '#ff0000',          // Kleur van de lijn (bijv. oranje)
+                                backgroundColor: 'transparent',    // Kleur ONDER de lijn (33 maakt het transparant)
+                                pointRadius: 0,
+                                pointHoverRadius:0,
+                                borderWidth: 2,
+                                fill: false,
+                                tension: 0.4
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: {
+                                mode: 'index',
+                                intersect: false
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    enabled: true
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: {
+                                        display:false
+                                    },
+                                    ticks: {
+                                        maxRotation: 0,
+                                        minRotation: 0,
+                                    }
+                                },
+                                y: {
+                                    grid: {
+                                        display:false
+                                    },
+                                    min: 0,
+                                    max: 3
+                                }
+                            }
+                        }
+                    })
+
+                    console.log(result.current.wind_direction_10m);
+                    document.getElementById("windrichting").style.rotate = `${result.current.wind_direction_10m}deg`;
+
+            })
+            .catch((error) => console.error(error));
+        }
+
+        getlocation();
+
+    </script>
+</body>
+</html>
