@@ -255,6 +255,66 @@
             transform:translate(-50%,-50%);
             transition:0.3s;
         }
+
+        #uv{
+            overflow:hidden;
+            position:relative;
+        }
+
+        #air{
+            position:relative;
+        }
+
+        #uvindextekst{
+            font-size:5.5dvw;
+            position:absolute;
+            left:50%;
+            top:0%;
+            transform: translate(-50%,-50%);
+        }
+
+        #airtekst{
+            font-size:5.5dvw;
+            position:absolute;
+            left:50%;
+            top:10%;
+            transform: translate(-50%,-50%);
+            margin:0;
+            padding:0;
+            width:45dvw;
+            text-align: center;
+        }
+
+        #uvtekst{
+            font-size:7dvw;
+        }
+
+        #uvmeter{
+            position:absolute;
+            bottom:0;
+            left:0;
+            width:50dvw;
+            height:0dvw;
+            background-color:#ff0000;
+            transition:0.3s;
+        }
+
+        #airsvg{
+            width:42dvw;
+            position:absolute;
+            top:50%;
+            left:50%;
+            transform: translate(-50%,-50%);
+        }
+
+        #airpressure{
+            position:absolute;
+            top:50%;
+            left:40%;
+            transform: translate(-50%,-50%);
+            margin:0;
+            font-size:4dvw;
+        }
     </style>
 </head>
 <body>
@@ -290,10 +350,14 @@
             <h5 id="windspeed"></h5>
         </div>
         <div id="uv" class="circle">
+            <h5 id="uvindextekst">uv-index</h5>
             <h5 id="uvtekst"></h5>
+            <div id="uvmeter"></div>
         </div>
         <div id="air" class="square">
+            <h5 id="airtekst">air pressure</h5>
             <h5 id="airpressure"></h5>
+            <img id="airsvg" src="luchtdrukding.svg">
         </div>
         </div>
     </div>
@@ -327,10 +391,13 @@
             fetch(`https://api.open-meteo.com/v1/forecast?latitude=${usercurrentlat}&longitude=${usercurrentlon}&timezone=auto&forecast_days=14&current=temperature_2m,precipitation,precipitation_probability,wind_speed_10m,wind_direction_10m,surface_pressure,uv_index,weather_code&hourly=temperature_2m,precipitation_probability,precipitation,weather_code&forecast_hours=24&past_hours=0&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset`, requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                    document.getElementById("currenttemp").innerHTML = result.current.temperature_2m + "C";
-                    document.getElementById("windspeed").innerHTML = result.current.wind_speed_10m + "km/u";
+                    document.getElementById("currenttemp").innerHTML = result.current.temperature_2m + " C";
+                    document.getElementById("windspeed").innerHTML = result.current.wind_speed_10m + " km/u";
                     document.getElementById("uvtekst").innerHTML = result.current.uv_index;
-                    document.getElementById("airpressure").innerHTML = result.current.surface_pressure + "hPa";
+                    document.getElementById("airpressure").innerHTML = result.current.surface_pressure + " hPa";
+
+                    var uvmeterheight = (result.current.uv_index / 12) * 44;
+                    document.getElementById("uvmeter").style.height = uvmeterheight + "dvw";
 
                     var h = new Date();
                     if(h.getHours() > 12){
@@ -356,23 +423,23 @@
                     document.getElementById("sunrisetekst").innerHTML = suntekst;                
 
                     if(result.current.weather_code >= 90){
-                        weericoon = "/bliksem.svg";
+                        weericoon = "bliksem.svg";
                     } else if(result.current.weather_code >= 81 || result.current.weather_code >= 66 || result.current.weather_code >= 67){
-                        weericoon = "/hagel.svg";
+                        weericoon = "hagel.svg";
                     } else if(result.current.weather_code >= 70){
-                        weericoon = "/sneeuw.svg";
+                        weericoon = "sneeuw.svg";
                     } else if(moon === 1){
-                        weericoon = "/maan.svg";
+                        weericoon = "maan.svg";
                     } else if(result.current.weather_code >= 50 || result.current.weather_code >= 80){
-                        weericoon = "/regen.svg";
+                        weericoon = "regen.svg";
                     } else if(result.current.weather_code >= 40){
-                        weericoon = "/mist.svg";
+                        weericoon = "mist.svg";
                     } else if(result.current.weather_code === 3){
-                        weericoon = "/wolk.svg";
+                        weericoon = "wolk.svg";
                     }  else if(result.current.weather_code > 0){
-                        weericoon = "/zon+wolk.svg";
+                        weericoon = "zon+wolk.svg";
                     } else if(result.current.weather_code === 0){
-                        weericoon = "/zon.svg";
+                        weericoon = "zon.svg";
                     }
 
                     document.getElementById("currentweathericon").src = weericoon;
@@ -384,23 +451,23 @@
                         var uurtemp = result.hourly.temperature_2m[i];
 
                         if(result.hourly.weather_code[i] >= 90){
-                            var uurweericoon = "/bliksem.svg";
+                            var uurweericoon = "bliksem.svg";
                         } else if(result.hourly.weather_code[i] >= 81 || result.hourly.weather_code[i] >= 66 || result.hourly.weather_code[i] >= 67){
-                            var uurweericoon = "/hagel.svg";
+                            var uurweericoon = "hagel.svg";
                         } else if(result.hourly.weather_code[i] >= 70){
-                            var uurweericoon = "/sneeuw.svg";
+                            var uurweericoon = "sneeuw.svg";
                         } else if(moon === 1){
-                            var uurweericoon = "/maan.svg";
+                            var uurweericoon = "maan.svg";
                         } else if(result.hourly.weather_code[i] >= 50 || result.hourly.weather_code[i] >= 80){
-                            var uurweericoon = "/regen.svg";
+                            var uurweericoon = "regen.svg";
                         } else if(result.hourly.weather_code[i] >= 40){
-                            var uurweericoon = "/mist.svg";
+                            var uurweericoon = "mist.svg";
                         } else if(result.hourly.weather_code[i] === 3){
-                            var uurweericoon = "/wolk.svg";
+                            var uurweericoon = "wolk.svg";
                         }  else if(result.hourly.weather_code[i] > 0){
-                            var uurweericoon = "/zon+wolk.svg";
+                            var uurweericoon = "zon+wolk.svg";
                         } else if(result.hourly.weather_code[i] === 0){
-                            var uurweericoon = "/zon.svg";
+                            var uurweericoon = "zon.svg";
                         }
 
                         var el = document.createElement("div");
