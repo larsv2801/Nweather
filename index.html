@@ -160,6 +160,9 @@
         .uurblok img {
             width:12dvw;
             transition:0.3s;
+            position:absolute;
+            top:50%;
+            transform: translateY(-50%);
         }
 
         .uurblok{
@@ -172,10 +175,23 @@
             font-family: inter;
             font-size:4dvw;
             transition:0.3s;
+            position:relative;
         }
 
         #uurblok0{
             margin-left:2dvw;
+        }
+
+        .uurblokuur{
+            position:absolute;
+            top:0;
+            transform: translateY(-50%);
+        }
+
+        .uurbloktemp{
+            position:absolute;
+            bottom:0;
+            transform: translateY(50%);
         }
 
         .square{
@@ -400,11 +416,11 @@
                     document.getElementById("uvmeter").style.height = uvmeterheight + "dvw";
 
                     var h = new Date();
-                    if(h.getHours() > 12){
+                    if(h.getHours() >= 12){
                         sun = result.daily.sunset[0];
                         var q = new Date(sun);
-                        suntekst = q.getHours() + ":" + q.getMinutes();
-                        if(h.getHours() > q){
+                        suntekst = String(q.getHours()).padStart(2, "0") + ":" + String(q.getMinutes()).padStart(2, "0");
+                        if(h > q){
                             moon = 1;
                         } else {
                             moon = 0;
@@ -412,8 +428,8 @@
                     } else {
                         sun = result.daily.sunrise[0];
                         var q = new Date(sun);
-                        suntekst = q.getHours() + ":" + q.getMinutes();
-                        if(h.getHours() < q){
+                        suntekst = String(q.getHours()).padStart(2, "0") + ":" + String(q.getMinutes()).padStart(2, "0");
+                        if(h < q){
                             moon = 1;
                         } else {
                             moon = 0;
@@ -444,11 +460,35 @@
 
                     document.getElementById("currentweathericon").src = weericoon;
                     for(let i = 0; i < 24; i++){
-                        var q = new Date(result.hourly.time[i]);
-                        var uurtekst = q.getHours();
+
+
+                        var z = new Date(result.hourly.time[i]);
+                        var uurtekst = z.getHours();
                         uren.push(uurtekst + "u");
                         if(uurtekst === 0){uurtekst = 24;}
                         var uurtemp = result.hourly.temperature_2m[i];
+
+                    if(uurtekst >= 12){
+                        sun = result.daily.sunset[0];
+                        var q = new Date(sun);
+                        if(z.getHours() > q.getHours() || z.getHours() === 0){
+                            moon = 1;
+                            console.log(z + " > " + q);
+                        } else {
+                            console.log(z + " < " + q);
+                            moon = 0;
+                        }
+                    } else {
+                        sun = result.daily.sunrise[0];
+                        var q = new Date(sun);
+                        if(z.getHours() < q.getHours()){
+                            console.log(z + " < " + q);
+                            moon = 1;
+                        } else {
+                            console.log(z + " > " + q);
+                            moon = 0;
+                        }
+                    };
 
                         if(result.hourly.weather_code[i] >= 90){
                             var uurweericoon = "bliksem.svg";
@@ -473,9 +513,9 @@
                         var el = document.createElement("div");
                         el.classList.add("uurblok");
                         el.setAttribute("id", "uurblok" + i);
-                        el.innerHTML = `<h3>${uurtekst}u</h3>
+                        el.innerHTML = `<h3 class="uurblokuur">${uurtekst}u</h3>
                                         <img src="${uurweericoon}">
-                                        <h3>${uurtemp}°C</h3>`;
+                                        <h3 class="uurbloktemp">${uurtemp}°C</h3>`;
                         document.getElementById("hourtemp").appendChild(el);
 
                         console.log(uurtekst + ", " + uurweericoon + ", " + uurtemp + ", " + i);
