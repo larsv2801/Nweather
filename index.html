@@ -331,6 +331,54 @@
             margin:0;
             font-size:4dvw;
         }
+
+        #dagen{
+            width:92dvw;
+            padding:2dvw;
+            height:61dvw;
+            border-radius:15px;
+            background-color: #404040;
+            display:flex;
+            flex-direction:column;
+            gap:2dvw;
+            flex-shrink: none;
+            overflow-x: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            transition:0.3s;
+        }
+
+        .dag{
+            width:96%;
+            padding-left:2%;
+            padding-right:2%;
+            height:7dvw;
+            display:flex;
+            gap:9dvw;
+            align-items: center;
+            flex-direction:row;
+            font-family: Nothing_Font;
+            background-color: #595959;
+            border-radius:calc(15px - 2dvw);
+            position:relative;
+            flex-shrink: none;
+        }
+
+        .dag h3{
+            font-size:4.5dvw;
+            height:7dvw;
+            width:27dvw;
+            text-align: left;
+            margin:0;
+            flex-shrink: none;
+        }
+
+        .dag img{
+           position:absolute;
+           left:11dvw;
+           height:4dvw;
+           width:11dvw;
+        }
     </style>
 </head>
 <body>
@@ -357,6 +405,57 @@
             </div>
         </div>
         <div id="daily">
+        <div id="dagen">
+            <div class="dag">
+                <h3 id="day1">Mo</h3>
+                <img src="wolk.svg" id="dagsvg1" class="dagsvg">
+                <h3 id="rain1">10%</h3>
+                <h3 id="min1">10 C</h3>
+                <h3 id="max1">12 C</h3>
+            </div>
+            <div class="dag">
+                <h3 id="day2">Tu</h3>
+                <img src="zon+wolk.svg" id="dagsvg1" class="dagsvg">
+                <h3 id="rain2">10%</h3>
+                <h3 id="min2">10 C</h3>
+                <h3 id="max2">12 C</h3>
+            </div>
+            <div class="dag">
+                <h3 id="day3">We</h3>
+                <img src="zon.svg" id="dagsvg1" class="dagsvg">
+                <h3 id="rain3">10%</h3>
+                <h3 id="min3">10 C</h3>
+                <h3 id="max3">12 C</h3>
+            </div>
+            <div class="dag">
+                <h3 id="day4">Th</h3>
+                <img src="" id="dagsvg1" class="dagsvg">
+                <h3 id="rain4">10%</h3>
+                <h3 id="min4">10 C</h3>
+                <h3 id="max4">12 C</h3>
+            </div>
+            <div class="dag">
+                <h3 id="day5">Fr</h3>
+                <img src="" id="dagsvg1" class="dagsvg">
+                <h3 id="rain5">10%</h3>
+                <h3 id="min5">10 C</h3>
+                <h3 id="max5">10 C</h3>
+            </div>
+            <div class="dag">
+                <h3 id="day6">Sa</h3>
+                <img src="" id="dagsvg1" class="dagsvg">
+                <h3 id="rain6">10%</h3>
+                <h3 id="min6">10 C</h3>
+                <h3 id="max6">10 C</h3>
+            </div>
+            <div class="dag">
+                <h3 id="day7">So</h3>
+                <img src="" id="dagsvg1" class="dagsvg">
+                <h3 id="rain7">10%</h3>
+                <h3 id="min7">10 C</h3>
+                <h3 id="max7">12 C</h3>
+            </div>
+        </div>
         <div id="sunrise" class="square">
             <img id="sunrisesvg" src="sunrise.svg">
             <h5 id="sunrisetekst"></h5>
@@ -537,7 +636,7 @@
                                 pointHoverRadius:0,
                                 borderWidth: 2,
                                 fill: false,
-                                tension: 0.4
+                                tension: 0.2
                             }]
                         },
                         options: {
@@ -578,6 +677,12 @@
 
                     console.log(result.current.wind_direction_10m);
                     document.getElementById("windrichting").style.rotate = `${result.current.wind_direction_10m}deg`;
+
+                    for(let i = 0; i < 7; i++){
+                        document.getElementById("rain" + (i + 1)).innerHTML = String(result.daily.precipitation_probability_max[i]).padStart(2, "0") + "%";
+                        document.getElementById("min" + (i + 1)).innerHTML = result.daily.temperature_2m_min[i].toFixed(1) + " C";
+                        document.getElementById("max" + (i + 1)).innerHTML = result.daily.temperature_2m_max[i].toFixed(1) + " C";
+                    }
 
             })
             .catch((error) => console.error(error));
