@@ -109,6 +109,7 @@
             -webkit-user-drag: none;
             opacity:0.5;
             display:flex;
+            z-index:999;
         }
 
         #currentweathericon{
@@ -380,24 +381,26 @@
             padding-right:2%;
             height:7dvw;
             display:flex;
-            gap:9dvw;
+            gap:8dvw;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             flex-direction:row;
             font-family: Nothing_Font;
             background-color: #595959;
             border-radius:calc(15px - 2dvw);
             position:relative;
-            flex-shrink: none;
         }
 
         .dag h3{
             font-size:4.5dvw;
-            height:7dvw;
-            width:27dvw;
+            width:17dvw;
             text-align: left;
             margin:0;
-            flex-shrink: none;
+            line-height: 1;
+            flex-shrink: 0;
+            display:flex;
+            align-items: center;
+            align-self: center;
         }
 
         .dag .max{
@@ -440,18 +443,18 @@
         <div id="daily">
         <div id="dagen">
             <div class="dag">
-                <h3 id="day1"> </h3>
+                <h3 id="day1">Ma</h3>
                 <img id="dagsvg1" class="dagsvg">
-                <h3 id="rain1"> </h3>
-                <h3 id="min1"> </h3>
-                <h3 id="max1" class="max"> </h3>
+                <h3 id="rain1">10%</h3>
+                <h3 id="min1">10C</h3>
+                <h3 id="max1" class="max">12C</h3>
             </div>
             <div class="dag">
-                <h3 id="day2"> </h3>
+                <h3 id="day2">Di</h3>
                 <img id="dagsvg2" class="dagsvg">
-                <h3 id="rain2"> </h3>
-                <h3 id="min2"> </h3>
-                <h3 id="max2" class="max"> </h3>
+                <h3 id="rain2">10%</h3>
+                <h3 id="min2">10 C</h3>
+                <h3 id="max2" class="max">12 C</h3>
             </div>
             <div class="dag">
                 <h3 id="day3"> </h3>
