@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nweather</title>
+    <link rel="icon" type="image/svg" href="wolk.svg">
     <style>
 
         @font-face {
@@ -67,7 +68,7 @@
         }
 
         #currenttemp{
-            font-size:11dvw;
+            font-size:12dvw;
             font-family: Nothing_Font;
             position:absolute;
             left:2dvw;
@@ -91,16 +92,41 @@
             transition:0.3s;
         }
 
+         #loader{
+            width:14dvw;
+            height:10dvw;
+            border:none;
+            outline:none;
+            position:absolute;
+            top: 70dvw;
+            left:50%;
+            transform: translate(-50%,-50%);
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
+            opacity:0.5;
+            display:flex;
+        }
+
         #currentweathericon{
             width:40dvw;
             height:40dvw;
-            margin-left:30dvw;
+            margin-left:28dvw;
             margin-top:30dvw;
             border:none;
             outline:none;
             animation:scrollanimatie linear;
             animation-timeline: --main-scroll;
             animation-range: cover 0% exit 100%;
+            user-select: none;
+            -moz-user-select: none;
+            -webkit-user-select: none;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-drag: none;
         }
 
         @keyframes scrollanimatie {
@@ -356,6 +382,7 @@
             display:flex;
             gap:9dvw;
             align-items: center;
+            justify-content: center;
             flex-direction:row;
             font-family: Nothing_Font;
             background-color: #595959;
@@ -373,12 +400,17 @@
             flex-shrink: none;
         }
 
+        .dag .max{
+            text-align: right;
+        }
+
         .dag img{
            position:absolute;
            left:11dvw;
            height:4dvw;
            width:11dvw;
         }
+
     </style>
 </head>
 <body>
@@ -396,6 +428,7 @@
         </div>
     </div>
     <div id="derest">
+    <img id="loader" src="nothingloader.gif">
     <img id="currentweathericon" src="">
     <div id="charts">
         <div id="hourtemp"></div>
@@ -407,53 +440,53 @@
         <div id="daily">
         <div id="dagen">
             <div class="dag">
-                <h3 id="day1">Mo</h3>
-                <img src="wolk.svg" id="dagsvg1" class="dagsvg">
-                <h3 id="rain1">10%</h3>
-                <h3 id="min1">10 C</h3>
-                <h3 id="max1">12 C</h3>
+                <h3 id="day1"> </h3>
+                <img id="dagsvg1" class="dagsvg">
+                <h3 id="rain1"> </h3>
+                <h3 id="min1"> </h3>
+                <h3 id="max1" class="max"> </h3>
             </div>
             <div class="dag">
-                <h3 id="day2">Tu</h3>
-                <img src="zon+wolk.svg" id="dagsvg1" class="dagsvg">
-                <h3 id="rain2">10%</h3>
-                <h3 id="min2">10 C</h3>
-                <h3 id="max2">12 C</h3>
+                <h3 id="day2"> </h3>
+                <img id="dagsvg2" class="dagsvg">
+                <h3 id="rain2"> </h3>
+                <h3 id="min2"> </h3>
+                <h3 id="max2" class="max"> </h3>
             </div>
             <div class="dag">
-                <h3 id="day3">We</h3>
-                <img src="zon.svg" id="dagsvg1" class="dagsvg">
-                <h3 id="rain3">10%</h3>
-                <h3 id="min3">10 C</h3>
-                <h3 id="max3">12 C</h3>
+                <h3 id="day3"> </h3>
+                <img id="dagsvg3" class="dagsvg">
+                <h3 id="rain3"> </h3>
+                <h3 id="min3"> </h3>
+                <h3 id="max3" class="max"> </h3>
             </div>
             <div class="dag">
-                <h3 id="day4">Th</h3>
-                <img src="" id="dagsvg1" class="dagsvg">
-                <h3 id="rain4">10%</h3>
-                <h3 id="min4">10 C</h3>
-                <h3 id="max4">12 C</h3>
+                <h3 id="day4"> </h3>
+                <img src="" id="dagsvg4" class="dagsvg">
+                <h3 id="rain4"> </h3>
+                <h3 id="min4"> </h3>
+                <h3 id="max4" class="max"> </h3>
             </div>
             <div class="dag">
-                <h3 id="day5">Fr</h3>
-                <img src="" id="dagsvg1" class="dagsvg">
-                <h3 id="rain5">10%</h3>
-                <h3 id="min5">10 C</h3>
-                <h3 id="max5">10 C</h3>
+                <h3 id="day5"> </h3>
+                <img src="" id="dagsvg5" class="dagsvg">
+                <h3 id="rain5"> </h3>
+                <h3 id="min5"> </h3>
+                <h3 id="max5" class="max"> </h3>
             </div>
             <div class="dag">
-                <h3 id="day6">Sa</h3>
-                <img src="" id="dagsvg1" class="dagsvg">
-                <h3 id="rain6">10%</h3>
-                <h3 id="min6">10 C</h3>
-                <h3 id="max6">10 C</h3>
+                <h3 id="day6"> </h3>
+                <img src="" id="dagsvg6" class="dagsvg">
+                <h3 id="rain6"> </h3>
+                <h3 id="min6"> </h3>
+                <h3 id="max6" class="max"> </h3>
             </div>
             <div class="dag">
-                <h3 id="day7">So</h3>
-                <img src="" id="dagsvg1" class="dagsvg">
-                <h3 id="rain7">10%</h3>
-                <h3 id="min7">10 C</h3>
-                <h3 id="max7">12 C</h3>
+                <h3 id="day7"> </h3>
+                <img src="" id="dagsvg7" class="dagsvg">
+                <h3 id="rain7"> </h3>
+                <h3 id="min7"> </h3>
+                <h3 id="max7" class="max"> </h3>
             </div>
         </div>
         <div id="sunrise" class="square">
@@ -557,6 +590,7 @@
                         weericoon = "zon.svg";
                     }
 
+                    document.getElementById("loader").style.display = "none";
                     document.getElementById("currentweathericon").src = weericoon;
                     for(let i = 0; i < 24; i++){
 
@@ -620,6 +654,29 @@
                         console.log(uurtekst + ", " + uurweericoon + ", " + uurtemp + ", " + i);
                     }
 
+                    var rainmax = 0;
+                    const yasmax = [3, 5, 10, 20, 50];
+                    var yasmaxbesluit;
+                    for(let i = 0; i < result.hourly.precipitation.length; i++){
+                        if(result.hourly.precipitation[i] > rainmax){
+                            rainmax = result.hourly.precipitation[i];
+                        }
+                    }
+                    console.log(rainmax);
+                    var algevonden = 0;
+                    for(let i = 0; i < yasmax.length; i++){
+                        if(rainmax < yasmax[i] && algevonden === 0){
+                            yasmaxbesluit = yasmax[i];
+                            algevonden = 1;
+                        } 
+                        if(i === (yasmax.length - 1) && algevonden === 0){
+                            console.log("meer dan 50!?");
+                            yasmaxbesluit = rainmax + 0.3;
+                        }
+                    }
+                    console.log(yasmaxbesluit);
+
+
                     const canvas = document.getElementById("regengrafiek");
                     console.log(result.hourly.precipitation);
                     const grafiek = new Chart(canvas, {
@@ -669,7 +726,7 @@
                                         display:false
                                     },
                                     min: 0,
-                                    max: 3
+                                    max: yasmaxbesluit
                                 }
                             }
                         }
@@ -682,6 +739,31 @@
                         document.getElementById("rain" + (i + 1)).innerHTML = String(result.daily.precipitation_probability_max[i]).padStart(2, "0") + "%";
                         document.getElementById("min" + (i + 1)).innerHTML = result.daily.temperature_2m_min[i].toFixed(1) + " C";
                         document.getElementById("max" + (i + 1)).innerHTML = result.daily.temperature_2m_max[i].toFixed(1) + " C";
+
+                        var weericoonn;
+                        if(result.daily.weather_code[i] >= 90){
+                            weericoonn = "bliksem.svg";
+                        } else if(result.daily.weather_code[i] >= 81 || result.daily.weather_code[i] >= 66 || result.daily.weather_code[i] >= 67){
+                            weericoonn = "hagel.svg";
+                        } else if(result.daily.weather_code[i] >= 70){
+                            weericoonn = "sneeuw.svg";
+                        } else if(result.daily.weather_code[i] >= 50 || result.daily.weather_code[i] >= 80){
+                            weericoonn = "regen.svg";
+                        } else if(result.daily.weather_code[i] >= 40){
+                            weericoonn = "mist.svg";
+                        } else if(result.daily.weather_code[i] === 3){
+                            weericoonn = "wolk.svg";
+                        }  else if(result.daily.weather_code[i] > 0){
+                            weericoonn = "zon+wolk.svg";
+                        } else if(result.daily.weather_code[i] === 0){
+                            weericoonn = "zon.svg";
+                        }
+
+                        document.getElementById("dagsvg" + (i + 1)).src = weericoonn;
+                        var dag = new Date(result.daily.time[i]);
+                        const dagenafk = ["So", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+                        var dagvandeweek = dagenafk[dag.getDay()];
+                        document.getElementById("day" + (i + 1)).innerHTML = dagvandeweek;
                     }
 
             })
@@ -689,6 +771,12 @@
         }
 
         getlocation();
+
+        const icon = document.getElementById('currentweathericon');
+
+        icon.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+        });
 
     </script>
 </body>
