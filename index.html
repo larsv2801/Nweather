@@ -586,6 +586,109 @@
             }
         }
 
+        #specificdaydiv{
+            width:calc(100dvw - 4px);
+            height:115dvw;
+            outline:2px solid white;
+            position:fixed;
+            left:2px;
+            bottom:0;
+            border-radius: 25px 25px 0px 0px;
+            background-color: #313131;
+            display:none;
+            z-index:995;
+            flex-direction:column;
+            padding-top:5dvw;
+            flex-shrink: 0;
+            align-items: center;
+            transform: translateY(120dvw);
+            transition: transform 0.3s ease;
+        }
+
+        #daytext{
+            font-size:8dvw;
+            font-family: Nothing_Font;
+            width:75dvw;
+            text-align: center;
+            line-height: 1;
+            height:10dvw;
+        }
+
+        #sdaytemp {
+            font-size:15dvw;
+            font-family: Nothing_Font;
+            width:60dvw;
+            text-align: left;
+            position:absolute;
+            top:19dvw;
+            left:3dvw;
+            height:20dvw;
+            line-height: 1;
+        }
+
+        #sdaywicon {
+            font-size:15dvw;
+            font-family: Nothing_Font;
+            width:15dvw;
+            text-align: left;
+            position:absolute;
+            top:21dvw;
+            right:3dvw;
+        }
+
+        #sdayhourtemp{
+            width:90dvw;
+            padding-left:2dvw;
+            padding-right:2dvw;
+            height:35dvw;
+            border-radius:15px;
+            background-color: #404040;
+            display:flex;
+            flex-direction:row;
+            gap:8dvw;
+            flex-shrink: none;
+            overflow-x: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            transition:0.3s;
+            position:absolute;
+            top:40dvw;
+        }
+
+        #sdayrainchart{
+            width:90dvw;
+            padding-left:2dvw;
+            padding-right:2dvw;
+            height:35dvw;
+            border-radius:15px;
+            background-color: #404040;
+            display:flex;
+            flex-direction:row;
+            gap:8dvw;
+            flex-shrink: none;
+            overflow-x: scroll;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+            transition:0.3s;
+            position:absolute;
+            top:77dvw;
+        }
+
+        #sdaychartwrapper{
+            width:170dvw;
+            height:35dvw;
+            position: relative;
+            transition:0.3s;
+        }
+
+        #sdayclosesvg{
+            width:7dvw;
+            height:7dvw;
+            fill:white;
+            position:absolute;
+            top:5dvw;
+            right:3dvw;
+        }
     </style>
 </head>
 <body>
@@ -619,6 +722,18 @@
     </div>
     <div id="derest">
     <img id="loader" src="nothingloader.gif">
+    <div id="specificdaydiv">
+        <div id="daytext"></div>
+        <svg id="sdayclosesvg" onclick="sluitdayweather()" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.3.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2026 Fonticons, Inc.--><path d="M183.1 137.4C170.6 124.9 150.3 124.9 137.8 137.4C125.3 149.9 125.3 170.2 137.8 182.7L275.2 320L137.9 457.4C125.4 469.9 125.4 490.2 137.9 502.7C150.4 515.2 170.7 515.2 183.2 502.7L320.5 365.3L457.9 502.6C470.4 515.1 490.7 515.1 503.2 502.6C515.7 490.1 515.7 469.8 503.2 457.3L365.8 320L503.1 182.6C515.6 170.1 515.6 149.8 503.1 137.3C490.6 124.8 470.3 124.8 457.8 137.3L320.5 274.7L183.1 137.4z"/></svg>
+        <div id="sdaytemp"></div>
+        <img src="" id="sdaywicon">
+        <div id="sdayhourtemp"></div>
+        <div id="sdayrainchart">
+            <div id="sdaychartwrapper">
+                <canvas id="sdayregengrafiek"></canvas>
+            </div>
+        </div>
+    </div>
     <img id="currentweathericon" src="">
     <div id="charts">
         <div id="hourtemp"></div>
@@ -629,49 +744,49 @@
         </div>
         <!--<div id="daily">-->
         <div id="dagen"> 
-            <div class="dag">
+            <div class="dag" id="dag1">
                 <h3 id="day1"></h3>
                 <img id="dagsvg1" class="dagsvg">
                 <h3 id="rain1"></h3>
                 <h3 id="min1"></h3>
                 <h3 id="max1" class="max"></h3>
             </div>
-            <div class="dag">
+            <div class="dag" id="dag2">
                 <h3 id="day2"></h3>
                 <img id="dagsvg2" class="dagsvg">
                 <h3 id="rain2"></h3>
                 <h3 id="min2"></h3>
                 <h3 id="max2" class="max"></h3>
             </div>
-            <div class="dag">
+            <div class="dag" id="dag3">
                 <h3 id="day3"> </h3>
                 <img id="dagsvg3" class="dagsvg">
                 <h3 id="rain3"> </h3>
                 <h3 id="min3"> </h3>
                 <h3 id="max3" class="max"> </h3>
             </div>
-            <div class="dag">
+            <div class="dag" id="dag4">
                 <h3 id="day4"> </h3>
                 <img src="" id="dagsvg4" class="dagsvg">
                 <h3 id="rain4"> </h3>
                 <h3 id="min4"> </h3>
                 <h3 id="max4" class="max"> </h3>
             </div>
-            <div class="dag">
+            <div class="dag" id="dag5">
                 <h3 id="day5"> </h3>
                 <img src="" id="dagsvg5" class="dagsvg">
                 <h3 id="rain5"> </h3>
                 <h3 id="min5"> </h3>
                 <h3 id="max5" class="max"> </h3>
             </div>
-            <div class="dag">
+            <div class="dag" id="dag6">
                 <h3 id="day6"> </h3>
                 <img src="" id="dagsvg6" class="dagsvg">
                 <h3 id="rain6"> </h3>
                 <h3 id="min6"> </h3>
                 <h3 id="max6" class="max"> </h3>
             </div>
-            <div class="dag">
+            <div class="dag" id="dag7">
                 <h3 id="day7"> </h3>
                 <img src="" id="dagsvg7" class="dagsvg">
                 <h3 id="rain7"> </h3>
@@ -712,6 +827,7 @@
         var suntekst;
         const uren = [];
         let grafiek;
+        let sgrafiek;
         let savelats = [];
         let savelongs = [];
         let savelocs = [];
@@ -968,6 +1084,11 @@
                             weericoonn = "zon.svg";
                         }
 
+                        if(i != 0){
+                            document.getElementById("dag" + (i + 1)).onclick = function (){
+                                getdayweather(i);
+                            }
+                        }
                         document.getElementById("dagsvg" + (i + 1)).src = weericoonn;
                         var dag = new Date(result.daily.time[i]);
                         const dagenafk = ["So", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -1045,7 +1166,7 @@
             loadlocaties();
         }
 
-        function langedruk(){
+        /* function langedruk(){
             var divs = document.querySelectorAll("#charts > div");
 
             divs.forEach(div => {
@@ -1055,7 +1176,7 @@
             });
         }
 
-        var startd;
+       var startd;
         var endd;
         function startPress(){
             var h = new Date();
@@ -1082,7 +1203,7 @@
             var parnt = document.getElementById("charts");
             parnt.insertBefore(elemnt, elemnt.previousElementSibling);
             document.getElementById(welke).style.opacity = 1;
-        }
+        }*/
 
         function savelocaties() {
             localStorage.setItem("locs", JSON.stringify(savelocs));
@@ -1150,6 +1271,204 @@
         })
 
         loadlocaties();
+
+
+        function getdayweather(weatherday) {
+            const requestOptions = {
+                method: "GET",
+                redirect: "follow"
+            };
+
+            fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lastusedlat}&longitude=${lastusedlon}&timezone=auto&forecast_days=14&hourly=temperature_2m,precipitation_probability,precipitation,weather_code&forecast_hours=168&past_hours=0&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max,sunrise,sunset`, requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+                    if(sgrafiek){
+                        sgrafiek.destroy();
+                    }
+                    document.getElementById("specificdaydiv").style.display = "flex";
+                    var dag = new Date(result.daily.time[weatherday]);
+                    const dagenafk = ["So", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
+                    const maandafk = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+                    var dagvandeweek = dagenafk[dag.getDay()];
+                    document.getElementById("daytext").innerHTML = dagvandeweek + " " +  dag.getDate() + " " + maandafk[dag.getMonth()];
+                    document.getElementById("sdaytemp").innerHTML = result.daily.temperature_2m_max[weatherday].toFixed(1) + " C";            
+
+                    uren.length = 0;
+
+                    var sdayweericoonn;
+                    if(result.daily.weather_code[weatherday] >= 90){
+                            sdayweericoonn = "bliksem.svg";
+                    } else if(result.daily.weather_code[weatherday] >= 81 || result.daily.weather_code[weatherday] >= 66 || result.daily.weather_code[weatherday] >= 67){
+                            sdayweericoonn = "hagel.svg";
+                    } else if(result.daily.weather_code[weatherday] >= 70){
+                            sdayweericoonn = "sneeuw.svg";
+                    } else if(result.daily.weather_code[weatherday] >= 50 || result.daily.weather_code[weatherday] >= 80){
+                            sdayweericoonn = "regen.svg";
+                    } else if(result.daily.weather_code[weatherday] >= 40){
+                            sdayweericoonn = "mist.svg";
+                    } else if(result.daily.weather_code[weatherday] === 3){
+                            sdayweericoonn = "wolk.svg";
+                    }  else if(result.daily.weather_code[weatherday] > 0){
+                            sdayweericoonn = "zon+wolk.svg";
+                    } else if(result.daily.weather_code[weatherday] === 0){
+                            sdayweericoonn = "zon.svg";
+                    }
+                    document.getElementById("sdaywicon").src = sdayweericoonn;
+
+                    var h = new Date();
+                    var momenteeluur = h.getHours();
+
+                    document.getElementById("sdayhourtemp").innerHTML = "";
+                    for(let i = ((24 * weatherday) - momenteeluur); i < ((24 * weatherday) - momenteeluur) + 24; i++){
+                        var z = new Date(result.hourly.time[i]);
+                        var uurtekst = z.getHours();
+                        if(uurtekst === 0){uurtekst = 24;}
+                        uren.push(uurtekst + "u");
+                        var uurtemp = result.hourly.temperature_2m[i];
+
+                    if(uurtekst >= 12){
+                        sun = result.daily.sunset[0];
+                        var q = new Date(sun);
+                        if(z.getHours() > q.getHours() || z.getHours() === 0){
+                            moon = 1;
+                            console.log(z + " > " + q);
+                        } else {
+                            console.log(z + " < " + q);
+                            moon = 0;
+                        }
+                    } else {
+                        sun = result.daily.sunrise[0];
+                        var q = new Date(sun);
+                        if(z.getHours() < q.getHours()){
+                            console.log(z + " < " + q);
+                            moon = 1;
+                        } else {
+                            console.log(z + " > " + q);
+                            moon = 0;
+                        }
+                    };
+
+                        if(result.hourly.weather_code[i] >= 90){
+                            var uurweericoon = "bliksem.svg";
+                        } else if(result.hourly.weather_code[i] >= 81 || result.hourly.weather_code[i] >= 66 || result.hourly.weather_code[i] >= 67){
+                            var uurweericoon = "hagel.svg";
+                        } else if(result.hourly.weather_code[i] >= 70){
+                            var uurweericoon = "sneeuw.svg";
+                        } else if(moon === 1){
+                            var uurweericoon = "maan.svg";
+                        } else if(result.hourly.weather_code[i] >= 50 || result.hourly.weather_code[i] >= 80){
+                            var uurweericoon = "regen.svg";
+                        } else if(result.hourly.weather_code[i] >= 40){
+                            var uurweericoon = "mist.svg";
+                        } else if(result.hourly.weather_code[i] === 3){
+                            var uurweericoon = "wolk.svg";
+                        }  else if(result.hourly.weather_code[i] > 0){
+                            var uurweericoon = "zon+wolk.svg";
+                        } else if(result.hourly.weather_code[i] === 0){
+                            var uurweericoon = "zon.svg";
+                        }
+
+                        var el = document.createElement("div");
+                        el.classList.add("uurblok");
+                        el.setAttribute("id", "sdayuurblok" + i);
+                        el.innerHTML = `<h3 class="uurblokuur">${uurtekst}u</h3>
+                                        <img src="${uurweericoon}">
+                                        <h3 class="uurbloktemp">${uurtemp.toFixed(1)}°C</h3>`;
+                        document.getElementById("sdayhourtemp").appendChild(el);
+
+                        console.log(uurtekst + ", " + uurweericoon + ", " + uurtemp + ", " + i);
+                    }
+
+                    var rainmax = 0;
+                    const yasmax = [3, 5, 10, 20, 50];
+                    var yasmaxbesluit;
+                    const dagregendata = [];
+                    for(let i = ((24 * weatherday) - momenteeluur); i < ((24 * weatherday) - momenteeluur) + 24; i++){
+                        if(result.hourly.precipitation[i] > rainmax){
+                            rainmax = result.hourly.precipitation[i];
+                        }
+                        dagregendata.push(result.hourly.precipitation[i]);
+                    }
+                    console.log(rainmax);
+                    var algevonden = 0;
+                    for(let i = 0; i < yasmax.length; i++){
+                        if(rainmax < yasmax[i] && algevonden === 0){
+                            yasmaxbesluit = yasmax[i];
+                            algevonden = 1;
+                        } 
+                        if(i === (yasmax.length - 1) && algevonden === 0){
+                            console.log("meer dan 50!?");
+                            yasmaxbesluit = rainmax + 0.3;
+                        }
+                    }
+                    console.log(yasmaxbesluit);
+
+
+                    const canvas = document.getElementById("sdayregengrafiek");
+                    sgrafiek = new Chart(canvas, {
+                        type: 'line',
+                        data: {
+                            labels: uren,
+                            datasets: [{
+                                label: 'rain (mm)',
+                                data: dagregendata,
+
+                                borderColor: '#ff0000',          // Kleur van de lijn (bijv. oranje)
+                                backgroundColor: 'transparent',    // Kleur ONDER de lijn (33 maakt het transparant)
+                                pointRadius: 0,
+                                pointHoverRadius:0,
+                                borderWidth: 2,
+                                fill: false,
+                                tension: 0.2
+                            }]
+                        },
+                        options: {
+                            responsive: true,
+                            maintainAspectRatio: false,
+                            interaction: {
+                                mode: 'index',
+                                intersect: false
+                            },
+                            plugins: {
+                                legend: {
+                                    display: false
+                                },
+                                tooltip: {
+                                    enabled: true
+                                }
+                            },
+                            scales: {
+                                x: {
+                                    grid: {
+                                        display:false
+                                    },
+                                    ticks: {
+                                        maxRotation: 0,
+                                        minRotation: 0,
+                                    }
+                                },
+                                y: {
+                                    grid: {
+                                        display:false
+                                    },
+                                    min: 0,
+                                    max: yasmaxbesluit
+                                }
+                            }
+                        }
+                    })
+                    document.getElementById("specificdaydiv").style.transform = "translateY(0dvw)";
+
+            })
+            .catch((error) => console.error(error));
+        }
+
+        function sluitdayweather(){
+            document.getElementById("specificdaydiv").style.transform = "translateY(120dvw)";
+            setTimeout(function () {
+                document.getElementById("specificdaydiv").style.display = "none";
+            },300);
+        }
     </script>
 </body>
 </html>
