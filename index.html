@@ -974,7 +974,7 @@
                         el.setAttribute("id", "uurblok" + i);
                         el.innerHTML = `<h3 class="uurblokuur">${uurtekst}u</h3>
                                         <img src="${uurweericoon}">
-                                        <h3 class="uurbloktemp">${uurtemp.toFixed(1)}°C</h3>`;
+                                        <h3 class="uurbloktemp">${uurtemp.toFixed(1)}°</h3>`;
                         document.getElementById("hourtemp").appendChild(el);
 
                         console.log(uurtekst + ", " + uurweericoon + ", " + uurtemp + ", " + i);
@@ -1052,7 +1052,10 @@
                                         display:false
                                     },
                                     min: 0,
-                                    max: yasmaxbesluit
+                                    max: yasmaxbesluit,
+                                    ticks: {
+                                        stepSize: 1
+                                    }
                                 }
                             }
                         }
@@ -1374,7 +1377,7 @@
                         el.setAttribute("id", "sdayuurblok" + i);
                         el.innerHTML = `<h3 class="uurblokuur">${uurtekst}u</h3>
                                         <img src="${uurweericoon}">
-                                        <h3 class="uurbloktemp">${uurtemp.toFixed(1)}°C</h3>`;
+                                        <h3 class="uurbloktemp">${uurtemp.toFixed(1)}°</h3>`;
                         document.getElementById("sdayhourtemp").appendChild(el);
 
                         console.log(uurtekst + ", " + uurweericoon + ", " + uurtemp + ", " + i);
