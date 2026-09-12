@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Nweather</title>
+    <link rel="manifest" href="manifest.json?v=1.0.3">
     <link rel="icon" type="image/svg" href="wolk.svg">
     <style>
 
@@ -1469,6 +1470,14 @@
                 document.getElementById("specificdaydiv").style.display = "none";
             },300);
         }
+
+        if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('service-worker.js')
+      .then(reg => console.log('Service Worker geregistreerd!', reg))
+      .catch(err => console.log('Registratie mislukt:', err));
+  });
+}
     </script>
 </body>
 </html>

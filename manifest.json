@@ -1,0 +1,49 @@
+{
+    "name": "Weather",
+    "short_name": "Weather",
+    "description": "A Nothing style weather app",
+    "categories": ["sports", "news", "entertainment"],
+    "start_url": "/Nweather/index.html?homescreen=true",
+    "scope": "/Nweather/",
+    "version": "1.0.3",
+    "background_color": "#000000",
+    "theme_color": "#ffff",
+    "display": "fullscreen",
+    "orientation": "portrait",
+    "icons": [
+        {
+            "src": "wolk192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "wolk512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "wolk.svg",
+            "sizes": "any",
+            "type": "image/svg",
+            "purpose": "monochrome maskable"
+        },
+         {
+            "src": "wolk144.png",
+            "sizes": "144x144",
+            "type": "image/png"
+        }
+    ],
+    "screenshots": [
+  {
+    "src": "screenshot1.png",
+    "sizes": "497x900",
+    "type": "image/png"
+  },
+  {
+    "src": "screenshot2.png",
+    "sizes": "497x892",
+    "type": "image/png"
+  }
+  ]
+}
